@@ -19,7 +19,7 @@ export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
       <Grid size={{ xs: 9 }}>
         <Grid container spacing={1}>
           {ATM_KEYBOARD_KEYS.map(buttonKey => (
-            <ATMButton buttonKey={buttonKey} onKeyPress={onKeyPress} />
+            <ATMButton buttonKey={buttonKey} onKeyPress={onKeyPress} key={buttonKey} />
           ))}
         </Grid>
       </Grid>
