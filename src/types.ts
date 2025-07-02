@@ -5,3 +5,11 @@ type ATMKeyboardNumericKey = (typeof ATM_KEYBOARD_KEYS)[number];
 type ATMOpsKey = (typeof ATM_OPS_KEYBOARD_KEYS)[number];
 
 export type ATMKeyboardKey = ATMKeyboardNumericKey | ATMOpsKey;
+
+export const ATM_ACTIONS = {
+  WITHDRAW: 'WITHDRAW',
+  DEPOSIT: 'DEPOSIT',
+  DISPLAY_BALANCE: 'DISPLAY_BALANCE',
+} as const;
+
+export type ATMActionType = (typeof ATM_ACTIONS)[keyof typeof ATM_ACTIONS];

@@ -1,5 +1,5 @@
 import { Container, Typography, TextField } from '@mui/material';
-import { ATMKeyboard } from './components';
+import { ATMActions, ATMKeyboard } from './components';
 import { useCallback, useState } from 'react';
 import type { ATMKeyboardKey } from './types';
 import { getFormattedCurrency } from './helpers';
@@ -27,6 +27,7 @@ export function ATMContainer() {
   return (
     <Container>
       <Typography variant="h1">ATM App</Typography>
+      <ATMActions />
       <TextField
         label=""
         value={getFormattedCurrency(atmInputValue)}
