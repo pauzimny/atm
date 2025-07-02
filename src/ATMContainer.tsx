@@ -1,3 +1,5 @@
+import { Typography } from '@mui/material';
+
 export default function ATMContainer() {
-  return <div>ATM Container</div>;
+  return <Typography variant="h1">ATM Container</Typography>;
 }
