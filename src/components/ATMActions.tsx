@@ -1,10 +1,11 @@
-import { Button, Grid } from '@mui/material';
-import { ATM_ACTIONS, type ATMActionType } from '../types';
+import Grid from '@mui/material/Grid';
+import { ATM_ACTIONS } from '../types';
+import { ActionButton, type ATMActionButton } from './ActionButton';
 
 const atmActions: (ATMActionButton & { id: number })[] = [
-  { id: 1, label: 'Display balance', actionName: ATM_ACTIONS.DISPLAY_BALANCE },
-  { id: 2, label: 'Withdraw money', actionName: ATM_ACTIONS.WITHDRAW },
-  { id: 3, label: 'Deposit money', actionName: ATM_ACTIONS.DEPOSIT },
+  { id: 1, label: 'Balance', actionName: ATM_ACTIONS.DISPLAY_BALANCE },
+  { id: 2, label: 'Withdraw', actionName: ATM_ACTIONS.WITHDRAW },
+  { id: 3, label: 'Deposit', actionName: ATM_ACTIONS.DEPOSIT },
 ];
 
 export function ATMActions() {
@@ -14,26 +15,6 @@ export function ATMActions() {
         const { id, ...rest } = atmAction;
         return <ActionButton {...rest} key={id} />;
       })}
-    </Grid>
-  );
-}
-
-type ATMActionButton = {
-  label: string;
-  actionName: ATMActionType;
-};
-
-export function ActionButton({ label, actionName }: ATMActionButton) {
-  return (
-    <Grid size={{ xs: 4 }} sx={{ marginTop: 6 }}>
-      <Button
-        variant="contained"
-        fullWidth
-        onClick={() => console.log('actionName', actionName)}
-        sx={{ height: '100%', minHeight: 60 }}
-      >
-        {label}
-      </Button>
     </Grid>
   );
 }

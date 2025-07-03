@@ -13,3 +13,10 @@ export const ATM_ACTIONS = {
 } as const;
 
 export type ATMActionType = (typeof ATM_ACTIONS)[keyof typeof ATM_ACTIONS];
+
+export const ATM_ACTION_STATUS = {
+  ERROR: 'ERROR',
+  SUCCESS: 'SUCCESS',
+} as const;
+
+export type ATMActionStatus = (typeof ATM_ACTION_STATUS)[keyof typeof ATM_ACTION_STATUS];

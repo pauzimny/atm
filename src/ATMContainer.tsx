@@ -1,11 +1,18 @@
-import { Container, Typography, TextField } from '@mui/material';
-import { ATMActions, ATMKeyboard } from './components';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import { useATMContext } from './context/useATMContext';
+import { ATMActions, ATMKeyboard, ATMDisplay } from './components';
 import type { ATMKeyboardKey } from './types';
-import { getFormattedCurrency } from './helpers';
 
 export function ATMContainer() {
   const [atmInputValue, setAtmInputValue] = useState<string>('');
+  const { selectedATMAction, submitRequestedMoneyValue, cleanupActionStatus } = useATMContext();
+
+  useEffect(() => {
+    setAtmInputValue('');
+    cleanupActionStatus();
+  }, [selectedATMAction, cleanupActionStatus]);
 
   const handleKeyPress = useCallback(
     (key: ATMKeyboardKey) => {
@@ -14,39 +21,27 @@ export function ATMContainer() {
           setAtmInputValue('');
           break;
         case 'Enter':
-          alert(`Entered value: ${atmInputValue}`);
+          submitRequestedMoneyValue(parseFloat(atmInputValue));
           setAtmInputValue('');
+          break;
+        case '<':
+          setAtmInputValue(prev => (prev ? prev.slice(0, -1) : ''));
           break;
         default:
           setAtmInputValue(prev => (prev ? prev + key : key));
       }
     },
-    [atmInputValue]
+    [atmInputValue, submitRequestedMoneyValue]
   );
 
   return (
     <Container>
-      <Typography variant="h1">ATM App</Typography>
-      <ATMActions />
-      <TextField
-        label=""
-        value={getFormattedCurrency(atmInputValue)}
-        fullWidth
-        sx={{ marginTop: 4 }}
-        slotProps={{
-          input: {
-            readOnly: true,
-            sx: {
-              input: {
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: 24,
-              },
-            },
-          },
-        }}
-      />
+      <Typography variant="h1" sx={{ fontSize: 32 }}>
+        - ATM -
+      </Typography>
 
+      <ATMActions />
+      <ATMDisplay inputValue={atmInputValue} />
       <ATMKeyboard onKeyPress={handleKeyPress} />
     </Container>
   );
