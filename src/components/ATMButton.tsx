@@ -3,9 +3,13 @@ import Grid from '@mui/material/Grid';
 import type { ATMKeyboardKey } from '../types';
 import type { ATMKeyboardProps } from './ATMKeyboard';
 
-type ATMButtonProps = { buttonKey: ATMKeyboardKey; onKeyPress: ATMKeyboardProps['onKeyPress'] };
+type ATMButtonProps = {
+  buttonKey: ATMKeyboardKey;
+  onKeyPress: ATMKeyboardProps['onKeyPress'];
+  disabled: boolean;
+};
 
-export function ATMButton({ buttonKey, onKeyPress }: ATMButtonProps) {
+export function ATMButton({ buttonKey, onKeyPress, disabled }: ATMButtonProps) {
   const shouldDisplayEmptyButton = buttonKey === '0';
   return (
     <>
@@ -16,6 +20,7 @@ export function ATMButton({ buttonKey, onKeyPress }: ATMButtonProps) {
           fullWidth
           sx={{ aspectRatio: '1 / 1', fontSize: 18 }}
           onClick={() => onKeyPress(buttonKey)}
+          disabled={disabled}
         >
           {buttonKey}
         </Button>
