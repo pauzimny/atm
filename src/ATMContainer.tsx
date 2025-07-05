@@ -39,6 +39,9 @@ export function ATMContainer() {
         case '<':
           setAtmInputValue(prev => (prev ? prev.slice(0, -1) : ''));
           break;
+        case '+00':
+          setAtmInputValue(prev => (prev ? (parseFloat(prev) * 100).toString() : ''));
+          break;
         default:
           setAtmInputValue(prev => (prev ? prev + key : key));
       }

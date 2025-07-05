@@ -25,8 +25,6 @@ export function ATMButton({ buttonKey, onKeyPress, disabled }: ATMButtonProps) {
           {buttonKey}
         </Button>
       </Grid>
-
-      {shouldDisplayEmptyButton && <EmptyButtonSpace />}
     </>
   );
 }
