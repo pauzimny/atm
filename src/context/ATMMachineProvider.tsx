@@ -63,6 +63,11 @@ export const ATMMachineProvider = ({ children }: { children: ReactNode }) => {
     setActionStatus(undefined);
   }, []);
 
+  const clearAtmSelections = useCallback(() => {
+    setActionStatus(undefined);
+    setSelectedATMAction(undefined);
+  }, []);
+
   const formattedUserBalance = useMemo(() => {
     return getFormattedCurrency(userBalance);
   }, [userBalance]);
@@ -76,6 +81,7 @@ export const ATMMachineProvider = ({ children }: { children: ReactNode }) => {
         submitRequestedMoneyValue,
         cleanupActionStatus,
         actionStatus,
+        clearAtmSelections,
       }}
     >
       {children}

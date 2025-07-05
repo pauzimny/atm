@@ -1,23 +1,21 @@
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { useATMContext } from '../context/useATMContext';
-import type { ATMActionType } from '../types';
+import type { SxProps, Theme } from '@mui/material/styles';
 
 export type ATMActionButton = {
   label: string;
-  actionName: ATMActionType;
+  onClick: () => void;
+  sx?: SxProps<Theme>;
 };
 
-export function ActionButton({ label, actionName }: ATMActionButton) {
-  const { selectATMAction } = useATMContext();
-
+export function ActionButton({ label, onClick, sx }: ATMActionButton) {
   return (
-    <Grid size={{ xs: 4 }} sx={{ marginTop: 6 }}>
+    <Grid size={4}>
       <Button
         variant="contained"
         fullWidth
-        onClick={() => selectATMAction(actionName)}
-        sx={{ height: '100%', minHeight: 60 }}
+        onClick={onClick}
+        sx={{ height: '100%', minHeight: 60, ...sx }}
       >
         {label}
       </Button>
