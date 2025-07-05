@@ -16,7 +16,7 @@ export function ATMContainer() {
   } = useATMContext();
 
   const shouldDisplayKeyboard =
-    selectedATMAction && selectedATMAction !== ATM_ACTIONS.DISPLAY_BALANCE;
+    selectedATMAction && selectedATMAction !== ATM_ACTIONS.DISPLAY_BALANCE && !actionStatus;
   const shouldDisplayActionsButtons = !selectedATMAction;
   const shouldDisplayRepeatButton = !!actionStatus;
   const shouldDisplayCancelButton = !!selectedATMAction;
@@ -47,7 +47,7 @@ export function ATMContainer() {
   );
 
   return (
-    <Container>
+    <Container sx={{ minWidth: { sm: 450 } }}>
       <Typography variant="h1" sx={{ fontSize: 32 }} flexGrow={1}>
         - ATM -
       </Typography>

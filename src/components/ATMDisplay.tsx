@@ -41,7 +41,7 @@ export function ATMDisplay({ inputValue }: ATMDisplayProps) {
   };
 
   return (
-    <Grid container sx={{ alignItems: 'center', height: 180 }}>
+    <Grid container sx={{ alignItems: 'center', height: 160 }}>
       <Box sx={{ width: '100%' }}>{renderDisplayContent()}</Box>
     </Grid>
   );

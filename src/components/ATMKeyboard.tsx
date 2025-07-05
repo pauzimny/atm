@@ -17,9 +17,9 @@ export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
   return (
     <Grid
       container
-      spacing={3}
+      spacing={2}
       justifyContent="center"
-      sx={{ maxWidth: 400, margin: 'auto', paddingBottom: 6 }}
+      sx={{ maxWidth: 400, margin: 'auto', paddingBottom: 4 }}
     >
       <Grid size={9}>
         <Grid container spacing={1}>
