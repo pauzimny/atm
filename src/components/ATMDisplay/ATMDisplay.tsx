@@ -2,11 +2,10 @@ import { useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { useATMContext } from '../../context/useATMContext';
+import { ATM_ACTIONS } from '../../types';
+import type { ATMDisplayProps } from './types';
 import { ATMDisplayInput } from './ATMDisplayInput';
-import { useATMContext } from '../context/useATMContext';
-import { ATM_ACTIONS } from '../types';
-
-export type ATMDisplayProps = { inputValue: string };
 
 export function ATMDisplay({ inputValue }: ATMDisplayProps) {
   const { selectedATMAction, formattedUserBalance, actionStatus } = useATMContext();

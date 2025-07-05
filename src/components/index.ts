@@ -1,6 +1,5 @@
-export { ATMKeyboard } from './ATMKeyboard';
-export { ATMButton } from './ATMButton';
-export { ATMActions } from './ATMActions';
-export { ActionButton } from './ActionButton';
-export type { ATMActionButton } from './ActionButton';
-export { ATMDisplay } from './ATMDisplay';
+export { ATMKeyboard } from './ATMKeyboard/ATMKeyboard';
+export { ATMButton } from './ATMKeyboard/ATMButton';
+export { ATMActions } from './ATMActions/ATMActions';
+export { ActionButton } from './ATMActions/ActionButton';
+export { ATMDisplay } from './ATMDisplay/ATMDisplay';

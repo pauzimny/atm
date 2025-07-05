@@ -1,13 +1,6 @@
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import type { ATMKeyboardKey } from '../types';
-import type { ATMKeyboardProps } from './ATMKeyboard';
-
-type ATMButtonProps = {
-  buttonKey: ATMKeyboardKey;
-  onKeyPress: ATMKeyboardProps['onKeyPress'];
-  disabled: boolean;
-};
+import type { ATMButtonProps } from './types';
 
 export function ATMButton({ buttonKey, onKeyPress, disabled }: ATMButtonProps) {
   const shouldDisplayEmptyButton = buttonKey === '0';

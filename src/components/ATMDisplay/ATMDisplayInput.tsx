@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
-import type { ATMDisplayProps } from './ATMDisplay';
-import { getFormattedCurrency } from '../helpers';
-import { isEmpty } from '../guards';
-import { ATM_ACTION_STATUS, ATM_ACTIONS, type ATMActionStatus, type ATMActionType } from '../types';
+import type { ATMDisplayInputProps } from './types';
+import { ATM_ACTION_STATUS, ATM_ACTIONS, type ATMActionType } from '../../types';
+import { isEmpty } from '../../guards';
+import { getFormattedCurrency } from '../../helpers';
 
 const statusMessages = {
   error: 'Your account balance is too low for this withdrawal.',
@@ -18,12 +18,6 @@ const getSuccesStatusMessage = (actionType?: ATMActionType) => {
   return actionType === ATM_ACTIONS.WITHDRAW
     ? statusMessages.successWithdrawal
     : statusMessages.successDeposit;
-};
-
-type ATMDisplayInputProps = ATMDisplayProps & {
-  inputLabel: string;
-  actionStatus?: ATMActionStatus;
-  actionType?: ATMActionType;
 };
 
 export function ATMDisplayInput({

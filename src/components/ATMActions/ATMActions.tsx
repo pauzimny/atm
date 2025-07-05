@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
-import { ATM_ACTIONS, type ATMActionType } from '../types';
+import { ATM_ACTIONS, type ATMActionType } from '../../types';
+import { useATMContext } from '../../context/useATMContext';
 import { ActionButton } from './ActionButton';
-import { useATMContext } from '../context/useATMContext';
 
 const atmActions: { id: number; label: string; actionName: ATMActionType }[] = [
   { id: 1, label: 'Balance', actionName: ATM_ACTIONS.DISPLAY_BALANCE },

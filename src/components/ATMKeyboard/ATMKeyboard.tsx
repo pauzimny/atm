@@ -1,18 +1,28 @@
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { ATMButton } from './ATMButton';
-import { ATM_KEYBOARD_KEYS, ATM_OPS_KEYBOARD_KEYS } from '../utils';
-import type { ATMKeyboardKey } from '../types';
-import { useATMContext } from '../context/useATMContext';
-
-export type ATMKeyboardProps = {
-  onKeyPress: (key: ATMKeyboardKey) => void;
-};
+import { ATM_KEYBOARD_KEYS, ATM_OPS_KEYBOARD_KEYS } from '../../utils';
+import type { ATMOpsKey } from '../../types';
+import { useATMContext } from '../../context/useATMContext';
+import type { ATMKeyboardProps } from './types';
 
 export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
   const { selectedATMAction } = useATMContext();
 
   const isButtonDisabled = !selectedATMAction;
+
+  const getButtonColor = (buttonKey: ATMOpsKey) => {
+    switch (buttonKey) {
+      case 'Enter':
+        return 'success';
+      case 'C':
+        return 'error';
+      case '<':
+        return 'warning';
+      default:
+        return;
+    }
+  };
 
   return (
     <Grid
@@ -42,7 +52,7 @@ export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
                 variant="contained"
                 fullWidth
                 sx={{ height: '100%', fontSize: 20 }}
-                color={key === 'Enter' ? 'success' : key === 'C' ? 'error' : 'warning'}
+                color={getButtonColor(key)}
                 onClick={() => onKeyPress(key)}
               >
                 {key}

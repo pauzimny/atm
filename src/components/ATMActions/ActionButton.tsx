@@ -1,12 +1,6 @@
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import type { SxProps, Theme } from '@mui/material/styles';
-
-export type ATMActionButton = {
-  label: string;
-  onClick: () => void;
-  sx?: SxProps<Theme>;
-};
+import type { ATMActionButton } from './types';
 
 export function ActionButton({ label, onClick, sx }: ATMActionButton) {
   return (
