@@ -14,7 +14,7 @@ export function ATMButton({ buttonKey, onKeyPress, disabled }: ATMButtonProps) {
   return (
     <>
       {shouldDisplayEmptyButton && <EmptyButtonSpace />}
-      <Grid size={{ xs: 4 }} key={buttonKey}>
+      <Grid size={4} key={buttonKey}>
         <Button
           variant="contained"
           fullWidth
@@ -33,7 +33,7 @@ export function ATMButton({ buttonKey, onKeyPress, disabled }: ATMButtonProps) {
 
 function EmptyButtonSpace() {
   return (
-    <Grid size={{ xs: 4 }}>
+    <Grid size={4}>
       <Button variant="contained" fullWidth sx={{ aspectRatio: '1 / 1', fontSize: 18 }} disabled />
     </Grid>
   );

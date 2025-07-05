@@ -5,6 +5,7 @@ export type ATMMachineProviderProps = {
   selectATMAction: (newSelectedAction: ATMActionType) => void;
   submitRequestedMoneyValue: (value: number) => void;
   cleanupActionStatus: () => void;
+  clearAtmSelections: () => void;
   selectedATMAction?: ATMActionType;
   actionStatus?: ATMActionStatus;
 };

@@ -15,8 +15,13 @@ export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
   const isButtonDisabled = !selectedATMAction;
 
   return (
-    <Grid container spacing={3} justifyContent="center" sx={{ maxWidth: 400, margin: 'auto' }}>
-      <Grid size={{ xs: 9 }}>
+    <Grid
+      container
+      spacing={3}
+      justifyContent="center"
+      sx={{ maxWidth: 400, margin: 'auto', paddingBottom: 6 }}
+    >
+      <Grid size={9}>
         <Grid container spacing={1}>
           {ATM_KEYBOARD_KEYS.map(buttonKey => (
             <ATMButton
@@ -29,7 +34,7 @@ export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
         </Grid>
       </Grid>
 
-      <Grid size={{ xs: 3 }}>
+      <Grid size={3}>
         <Grid container direction="column" justifyContent={'space-between'} height={'100%'}>
           {ATM_OPS_KEYBOARD_KEYS.map(key => (
             <Grid key={key} height={'32%'}>
