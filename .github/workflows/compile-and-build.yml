@@ -33,7 +33,7 @@ jobs:
         run: pnpm run lint
 
       - name: TypeScript type check
-        run: pnpm tsc --noEmit
+        run: pnpm run typecheck
 
       - name: Build
         run: pnpm build
