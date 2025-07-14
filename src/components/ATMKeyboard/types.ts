@@ -1,11 +1,12 @@
 import type { ATMKeyboardKey } from '../../types';
 
 export type ATMKeyboardProps = {
-  onKeyClick: (key: ATMKeyboardKey) => void;
+  inputValue: string;
+  updateInputValue: (value: string) => void;
 };
 
 export type ATMButtonProps = {
   buttonKey: ATMKeyboardKey;
-  onKeyClick: ATMKeyboardProps['onKeyClick'];
+  onKeyClick: (key: ATMKeyboardKey) => void;
   disabled: boolean;
 };
