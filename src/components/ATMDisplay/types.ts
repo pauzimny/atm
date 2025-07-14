@@ -7,3 +7,5 @@ export type ATMDisplayInputProps = ATMDisplayProps & {
   actionStatus?: ATMActionStatus;
   actionType?: ATMActionType;
 };
+
+export type StatusMessagesProps = Pick<ATMDisplayInputProps, 'actionStatus' | 'actionType'>;
