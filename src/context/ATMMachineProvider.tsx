@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState, type ReactNode } from 'react';
 import { ATMMachineContext } from './useATMContext';
 import { ATM_ACTION_STATUS, ATM_ACTIONS, type ATMActionStatus, type ATMActionType } from '../types';
 import { USER_BALANCE } from '../utils';
-import { checkIsValidInput, getFormattedCurrency } from '../helpers';
+import { checkIsBalanceEnough, checkIsValidInput, getFormattedCurrency } from '../helpers';
 import { isEmpty } from '../guards';
 
 export const ATMMachineProvider = ({ children }: { children: ReactNode }) => {
@@ -16,13 +16,20 @@ export const ATMMachineProvider = ({ children }: { children: ReactNode }) => {
 
   const handleWithdrawAction = useCallback(
     (value: number) => {
-      const isValidValue = checkIsValidInput({
+      const isValidInput = checkIsValidInput(value);
+
+      if (!isValidInput) {
+        setActionStatus(ATM_ACTION_STATUS.ERROR_INVALID_VALUE);
+        return;
+      }
+
+      const isBalanceEnough = checkIsBalanceEnough({
         availableBalance: userBalance,
         requestedValue: value,
       });
 
-      if (!isValidValue) {
-        setActionStatus(ATM_ACTION_STATUS.ERROR);
+      if (!isBalanceEnough) {
+        setActionStatus(ATM_ACTION_STATUS.ERROR_NOT_ENOUGH_BALANCE);
         return;
       }
 
@@ -54,6 +61,8 @@ export const ATMMachineProvider = ({ children }: { children: ReactNode }) => {
         case ATM_ACTIONS.WITHDRAW:
           handleWithdrawAction(value);
           break;
+        default:
+          throw new Error('Unknown ATM action!');
       }
     },
     [selectedATMAction, handleWithdrawAction, handleDepositAction]

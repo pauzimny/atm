@@ -13,7 +13,7 @@ export const getFormattedCurrency = (valueToBeFormatted: number | undefined) => 
   }).format(valueToBeFormatted);
 };
 
-export const checkIsValidInput = ({
+export const checkIsBalanceEnough = ({
   requestedValue,
   availableBalance,
 }: {
@@ -24,4 +24,17 @@ export const checkIsValidInput = ({
   if (requestedValue <= 0) return false;
 
   return requestedValue <= availableBalance;
+};
+
+export const checkIsValidInput = (amount: number) => {
+  if (!Number.isInteger(amount) || amount <= 0) return false;
+
+  for (let x = 0; x <= Math.floor(amount / 50); x++) {
+    const remaining = amount - x * 50;
+    if (remaining % 20 === 0) {
+      return true;
+    }
+  }
+
+  return false;
 };

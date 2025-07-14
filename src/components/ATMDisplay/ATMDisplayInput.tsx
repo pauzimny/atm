@@ -7,9 +7,10 @@ import { isEmpty } from '../../guards';
 import { getFormattedCurrency } from '../../helpers';
 
 const statusMessages = {
-  error: 'Your account balance is too low for this withdrawal.',
+  errorNotEnoughBalance: 'Your account balance is too low for this withdrawal.',
   successWithdrawal: 'Withdrawal successful.',
   successDeposit: 'Deposit successful.',
+  errorInvalidInput: 'This ATM gives out only 20, 50, 100, and 200 PLN notes.',
 };
 
 const getSuccessStatusMessage = (actionType?: ATMActionType) => {
@@ -28,14 +29,20 @@ export function ATMDisplayInput({
 }: ATMDisplayInputProps) {
   const displayLabel = !actionStatus && isEmpty(inputValue);
   const displayValue = !displayLabel && !isEmpty(inputValue);
-  const isError = actionStatus === ATM_ACTION_STATUS.ERROR;
+
+  const isNotEnoughBalanceError = actionStatus === ATM_ACTION_STATUS.ERROR_NOT_ENOUGH_BALANCE;
+  const isInvalidValueError = actionStatus === ATM_ACTION_STATUS.ERROR_INVALID_VALUE;
+
   const isSuccess = actionStatus === ATM_ACTION_STATUS.SUCCESS;
 
   return (
     <Box width={'100%'} fontSize={24}>
       {displayLabel && <Typography>{inputLabel}</Typography>}
       {displayValue && getFormattedCurrency(parseFloat(inputValue))}
-      {isError && <Alert severity="error">{statusMessages.error}</Alert>}
+      {isNotEnoughBalanceError && (
+        <Alert severity="error">{statusMessages.errorNotEnoughBalance}</Alert>
+      )}
+      {isInvalidValueError && <Alert severity="error">{statusMessages.errorInvalidInput}</Alert>}
       {isSuccess && <Alert severity="success">{getSuccessStatusMessage(actionType)}</Alert>}
     </Box>
   );

@@ -15,8 +15,9 @@ export const ATM_ACTIONS = {
 export type ATMActionType = (typeof ATM_ACTIONS)[keyof typeof ATM_ACTIONS];
 
 export const ATM_ACTION_STATUS = {
-  ERROR: 'ERROR',
   SUCCESS: 'SUCCESS',
+  ERROR_NOT_ENOUGH_BALANCE: 'ERROR_NOT_ENOUGH_BALANCE',
+  ERROR_INVALID_VALUE: 'ERROR_INVALID_VALUE',
 } as const;
 
 export type ATMActionStatus = (typeof ATM_ACTION_STATUS)[keyof typeof ATM_ACTION_STATUS];
