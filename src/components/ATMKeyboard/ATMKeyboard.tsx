@@ -2,12 +2,13 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { ATMButton } from './ATMButton';
 import { ATM_KEYBOARD_KEYS, ATM_OPS_KEYBOARD_KEYS } from '../../utils';
-import type { ATMOpsKey } from '../../types';
+import type { ATMKeyboardKey, ATMOpsKey } from '../../types';
 import { useATMContext } from '../../context/useATMContext';
 import type { ATMKeyboardProps } from './types';
+import { useCallback } from 'react';
 
-export function ATMKeyboard({ onKeyClick }: ATMKeyboardProps) {
-  const { selectedATMAction } = useATMContext();
+export function ATMKeyboard({ updateInputValue, inputValue }: ATMKeyboardProps) {
+  const { selectedATMAction, submitRequestedMoneyValue } = useATMContext();
 
   const isButtonDisabled = !selectedATMAction;
 
@@ -24,6 +25,29 @@ export function ATMKeyboard({ onKeyClick }: ATMKeyboardProps) {
     }
   };
 
+  const handleKeyClick = useCallback(
+    (key: ATMKeyboardKey) => {
+      switch (key) {
+        case 'C':
+          updateInputValue('');
+          break;
+        case 'Enter':
+          submitRequestedMoneyValue(parseFloat(inputValue));
+          updateInputValue('');
+          break;
+        case '<':
+          updateInputValue(inputValue ? inputValue.slice(0, -1) : '');
+          break;
+        case '+00':
+          updateInputValue(inputValue ? (parseFloat(inputValue) * 100).toString() : '');
+          break;
+        default:
+          updateInputValue(inputValue ? inputValue + key : key);
+      }
+    },
+    [inputValue, updateInputValue, submitRequestedMoneyValue]
+  );
+
   return (
     <Grid
       container
@@ -36,7 +60,7 @@ export function ATMKeyboard({ onKeyClick }: ATMKeyboardProps) {
           {ATM_KEYBOARD_KEYS.map(buttonKey => (
             <ATMButton
               buttonKey={buttonKey}
-              onKeyClick={onKeyClick}
+              onKeyClick={handleKeyClick}
               key={buttonKey}
               disabled={isButtonDisabled}
             />
@@ -53,7 +77,7 @@ export function ATMKeyboard({ onKeyClick }: ATMKeyboardProps) {
                 fullWidth
                 sx={{ height: '100%', fontSize: 20 }}
                 color={getButtonColor(key)}
-                onClick={() => onKeyClick(key)}
+                onClick={() => handleKeyClick(key)}
               >
                 {key}
               </Button>

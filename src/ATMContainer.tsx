@@ -3,17 +3,12 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useATMContext } from './context/useATMContext';
 import { ATMActions, ATMKeyboard, ATMDisplay, ActionButton } from './components';
-import { ATM_ACTIONS, type ATMKeyboardKey } from './types';
+import { ATM_ACTIONS } from './types';
 
 export function ATMContainer() {
   const [atmInputValue, setAtmInputValue] = useState<string>('');
-  const {
-    selectedATMAction,
-    submitRequestedMoneyValue,
-    cleanupActionStatus,
-    clearAtmSelections,
-    actionStatus,
-  } = useATMContext();
+  const { selectedATMAction, cleanupActionStatus, clearAtmSelections, actionStatus } =
+    useATMContext();
 
   const shouldDisplayKeyboard =
     selectedATMAction && selectedATMAction !== ATM_ACTIONS.DISPLAY_BALANCE && !actionStatus;
@@ -26,28 +21,9 @@ export function ATMContainer() {
     clearAtmSelections();
   }, [clearAtmSelections]);
 
-  const handleKeyPress = useCallback(
-    (key: ATMKeyboardKey) => {
-      switch (key) {
-        case 'C':
-          setAtmInputValue('');
-          break;
-        case 'Enter':
-          submitRequestedMoneyValue(parseFloat(atmInputValue));
-          setAtmInputValue('');
-          break;
-        case '<':
-          setAtmInputValue(prev => (prev ? prev.slice(0, -1) : ''));
-          break;
-        case '+00':
-          setAtmInputValue(prev => (prev ? (parseFloat(prev) * 100).toString() : ''));
-          break;
-        default:
-          setAtmInputValue(prev => (prev ? prev + key : key));
-      }
-    },
-    [atmInputValue, submitRequestedMoneyValue]
-  );
+  const updateInputValue = useCallback((value: string) => {
+    setAtmInputValue(value);
+  }, []);
 
   return (
     <Container sx={{ minWidth: { sm: 450 } }}>
@@ -57,7 +33,9 @@ export function ATMContainer() {
 
       <ATMDisplay inputValue={atmInputValue} />
       {shouldDisplayActionsButtons && <ATMActions />}
-      {shouldDisplayKeyboard && <ATMKeyboard onKeyClick={handleKeyPress} />}
+      {shouldDisplayKeyboard && (
+        <ATMKeyboard updateInputValue={updateInputValue} inputValue={atmInputValue} />
+      )}
       {shouldDisplayRepeatButton && <ActionButton label="Repeat" onClick={cleanupActionStatus} />}
       {shouldDisplayCancelButton && (
         <ActionButton label="Cancel" onClick={userActionCleanup} sx={{ marginTop: 2 }} />
