@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import type { ATMButtonProps } from './types';
 
-export function ATMButton({ buttonKey, onKeyPress, disabled }: ATMButtonProps) {
+export function ATMButton({ buttonKey, onKeyClick, disabled }: ATMButtonProps) {
   const shouldDisplayEmptyButton = buttonKey === '0';
   return (
     <>
@@ -12,7 +12,7 @@ export function ATMButton({ buttonKey, onKeyPress, disabled }: ATMButtonProps) {
           variant="contained"
           fullWidth
           sx={{ aspectRatio: '1 / 1', fontSize: 18 }}
-          onClick={() => onKeyPress(buttonKey)}
+          onClick={() => onKeyClick(buttonKey)}
           disabled={disabled}
         >
           {buttonKey}

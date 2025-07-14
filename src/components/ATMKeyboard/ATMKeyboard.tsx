@@ -6,7 +6,7 @@ import type { ATMOpsKey } from '../../types';
 import { useATMContext } from '../../context/useATMContext';
 import type { ATMKeyboardProps } from './types';
 
-export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
+export function ATMKeyboard({ onKeyClick }: ATMKeyboardProps) {
   const { selectedATMAction } = useATMContext();
 
   const isButtonDisabled = !selectedATMAction;
@@ -36,7 +36,7 @@ export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
           {ATM_KEYBOARD_KEYS.map(buttonKey => (
             <ATMButton
               buttonKey={buttonKey}
-              onKeyPress={onKeyPress}
+              onKeyClick={onKeyClick}
               key={buttonKey}
               disabled={isButtonDisabled}
             />
@@ -53,7 +53,7 @@ export function ATMKeyboard({ onKeyPress }: ATMKeyboardProps) {
                 fullWidth
                 sx={{ height: '100%', fontSize: 20 }}
                 color={getButtonColor(key)}
-                onClick={() => onKeyPress(key)}
+                onClick={() => onKeyClick(key)}
               >
                 {key}
               </Button>

@@ -9,10 +9,10 @@ import { getFormattedCurrency } from '../../helpers';
 const statusMessages = {
   error: 'Your account balance is too low for this withdrawal.',
   successWithdrawal: 'Withdrawal successful.',
-  successDeposit: 'Deposit successful,',
+  successDeposit: 'Deposit successful.',
 };
 
-const getSuccesStatusMessage = (actionType?: ATMActionType) => {
+const getSuccessStatusMessage = (actionType?: ATMActionType) => {
   if (!actionType) return;
 
   return actionType === ATM_ACTIONS.WITHDRAW
@@ -36,7 +36,7 @@ export function ATMDisplayInput({
       {displayLabel && <Typography>{inputLabel}</Typography>}
       {displayValue && getFormattedCurrency(parseFloat(inputValue))}
       {isError && <Alert severity="error">{statusMessages.error}</Alert>}
-      {isSuccess && <Alert severity="success">{getSuccesStatusMessage(actionType)}</Alert>}
+      {isSuccess && <Alert severity="success">{getSuccessStatusMessage(actionType)}</Alert>}
     </Box>
   );
 }

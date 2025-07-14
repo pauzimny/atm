@@ -57,7 +57,7 @@ export function ATMContainer() {
 
       <ATMDisplay inputValue={atmInputValue} />
       {shouldDisplayActionsButtons && <ATMActions />}
-      {shouldDisplayKeyboard && <ATMKeyboard onKeyPress={handleKeyPress} />}
+      {shouldDisplayKeyboard && <ATMKeyboard onKeyClick={handleKeyPress} />}
       {shouldDisplayRepeatButton && <ActionButton label="Repeat" onClick={cleanupActionStatus} />}
       {shouldDisplayCancelButton && (
         <ActionButton label="Cancel" onClick={userActionCleanup} sx={{ marginTop: 2 }} />
